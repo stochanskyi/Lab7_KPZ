@@ -1,3 +1,4 @@
+using Lab7.DatabaseAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,7 @@ namespace Lab7
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddXmlDataContractSerializerFormatters();
+            services.AddDbContext<CompanyManagementContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
