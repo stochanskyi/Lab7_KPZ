@@ -1,4 +1,6 @@
 using Lab7.DatabaseAccess;
+using Lab7.DatabaseAccess.sources.projectsSourceModel;
+using Lab7.repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +29,10 @@ namespace Lab7
         {
             services.AddControllers().AddXmlDataContractSerializerFormatters();
             services.AddDbContext<CompanyManagementContext>();
+            
+            services.AddScoped<IProjectsSourceModel, ProjectsSourceModel>();
+            services.AddScoped<IProjectsRepository, ProjectsRepository>();
+
             services.AddSwaggerGen();
         }
 

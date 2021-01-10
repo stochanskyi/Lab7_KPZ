@@ -1,5 +1,6 @@
 ﻿using Lab7.DatabaseAccess;
 using Lab7.Models;
+using Lab7.repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,50 +13,29 @@ namespace Lab7.Controllers
     [Route("[controller]")]
     public class ProjectsController : Controller
     {
+        private IProjectsRepository repository;
 
-        private CompanyManagementContext context;
 
-        public ProjectsController(CompanyManagementContext context)
+        public ProjectsController(IProjectsRepository repository)
         {
-            this.context = context;
+            this.repository = repository;
         }
 
         [HttpGet]
         public ActionResult Get()
         {
-            return Ok(context.Projects.ToList().Select(p => toViewModel(p)));
+            return Ok(repository.GetProjects());
         }
 
         [HttpPost]
         public ActionResult Create(ProjectViewModel project)
         {
-            var pr = new Project
-            {
-                ProjectName = project.Name,
-                Budget = project.Budget,
-                StatusId = 1,
-                Description = project.Description,
-                CustId = 2
-            };
-
-            context.Projects.Add(pr);
-            context.SaveChanges();
-
             return Ok();
         }
 
         [HttpPut]
         public ActionResult Update(ProjectViewModel project)
         {
-            var projectToUpdate = context.Projects.ToList().FirstOrDefault(p => p.ProjectId == project.Id);
-            if (projectToUpdate == null) return NotFound("project with specified ID cannot be found");
-
-            projectToUpdate.ProjectName = project.Name;
-            projectToUpdate.Budget = project.Budget;
-            projectToUpdate.Description = project.Description;
-
-            context.SaveChanges();
-
             return Ok();
         }
 
@@ -63,12 +43,6 @@ namespace Lab7.Controllers
         [HttpDelete]
         public ActionResult Delete(int id)
         {
-            var projectToDelete = context.Projects.ToList().FirstOrDefault(p => p.ProjectId == id);
-            if (projectToDelete == null) return NotFound();
-
-            context.Projects.Remove(projectToDelete);
-            context.SaveChanges();
-
             return Ok();
         }
 
