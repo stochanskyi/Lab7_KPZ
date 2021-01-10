@@ -23,9 +23,6 @@ namespace Lab7.Controllers
         [HttpGet]
         public ActionResult Get()
         {
-            var result = new List<ProjectViewModel>();
-            result.Add(new ProjectViewModel(1, "asd", 12, "asdfca"));
-            
             return Ok(context.Projects.ToList().Select(p => toViewModel(p)));
         }
 
