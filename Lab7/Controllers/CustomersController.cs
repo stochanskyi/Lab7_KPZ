@@ -1,6 +1,7 @@
 ﻿using Lab7.DatabaseAccess;
 using Lab7.Models;
 using Lab7.repositories.customers;
+using Lab7.repositories.unitOfWork;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -10,11 +11,16 @@ namespace Lab7.Controllers
     [Route("[controller]")]
     public class CustomersController : Controller
     {
-        private ICustomersRepository repository;
+        private UnitOfWork uow;
 
-        public CustomersController(ICustomersRepository repository)
+        private ICustomersRepository repository
         {
-            this.repository = repository;
+            get { return uow.CustomersRepository; }
+        }
+
+        public CustomersController(UnitOfWork uow)
+        {
+            this.uow = uow;
         }
 
         [HttpGet]
@@ -42,6 +48,10 @@ namespace Lab7.Controllers
         {
             repository.DeleteCustomer(id);
             return Ok();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
         }
     }
 }

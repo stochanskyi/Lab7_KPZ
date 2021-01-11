@@ -1,11 +1,8 @@
 ﻿using Lab7.DatabaseAccess;
 using Lab7.Models;
 using Lab7.repositories;
+using Lab7.repositories.unitOfWork;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Lab7.Controllers
 {
@@ -13,12 +10,20 @@ namespace Lab7.Controllers
     [Route("[controller]")]
     public class ProjectsController : Controller
     {
-        private IProjectsRepository repository;
-
-
-        public ProjectsController(IProjectsRepository repository)
+        private IProjectsRepository repository
         {
-            this.repository = repository;
+            get
+            {
+                return uow.ProjectsRepository;
+            }
+        }
+
+        private UnitOfWork uow;
+
+
+        public ProjectsController(UnitOfWork uow)
+        {
+            this.uow = uow;
         }
 
         [HttpGet]

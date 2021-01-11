@@ -10,6 +10,11 @@ namespace Lab7.DatabaseAccess.sources.customersSourceModel
 
         private CompanyManagementContext context;
 
+        public CustomerSourceModel(CompanyManagementContext context)
+        {
+            this.context = context;
+        }
+
         public void DeleteCustomer(int id)
         {
             var customerToDelete = context.Customers.ToList().FirstOrDefault(c => c.CustId == id);
