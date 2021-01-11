@@ -30,12 +30,14 @@ namespace Lab7.Controllers
         [HttpPost]
         public ActionResult Create(ProjectViewModel project)
         {
+            repository.CreateProject(project);
             return Ok();
         }
 
         [HttpPut]
         public ActionResult Update(ProjectViewModel project)
         {
+            repository.UpdateProject(project);
             return Ok();
         }
 
@@ -43,12 +45,8 @@ namespace Lab7.Controllers
         [HttpDelete]
         public ActionResult Delete(int id)
         {
+            repository.DeleteProject(id);
             return Ok();
-        }
-
-        private ProjectViewModel toViewModel(Project project)
-        {
-            return new ProjectViewModel(project.ProjectId, project.ProjectName, (decimal)project.Budget, project.Description);
         }
     }
 }

@@ -1,6 +1,8 @@
 using Lab7.DatabaseAccess;
+using Lab7.DatabaseAccess.sources.customersSourceModel;
 using Lab7.DatabaseAccess.sources.projectsSourceModel;
 using Lab7.repositories;
+using Lab7.repositories.customers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -32,6 +34,9 @@ namespace Lab7
             
             services.AddScoped<IProjectsSourceModel, ProjectsSourceModel>();
             services.AddScoped<IProjectsRepository, ProjectsRepository>();
+
+            services.AddScoped<ICustomersRepository, CustomersRepository>();
+            services.AddScoped<ICustomersSourceModel, CustomerSourceModel>();
 
             services.AddSwaggerGen();
         }
