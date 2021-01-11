@@ -20,7 +20,6 @@ namespace Lab7.Controllers
 
         private UnitOfWork uow;
 
-
         public ProjectsController(UnitOfWork uow)
         {
             this.uow = uow;
@@ -37,6 +36,12 @@ namespace Lab7.Controllers
         {
             repository.CreateProject(project);
             return Ok();
+        }
+
+        [HttpGet("/{id}")]
+        public ActionResult GetById(int id)
+        {
+            return Ok(repository.GetById(id));
         }
 
         [HttpPut]

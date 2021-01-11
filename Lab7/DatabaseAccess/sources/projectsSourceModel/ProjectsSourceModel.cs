@@ -23,6 +23,11 @@ namespace Lab7.DatabaseAccess.sources.projectsSourceModel
             context.SaveChanges();
         }
 
+        public Project FindById(int Id)
+        {
+            return context.Projects.Find(Id);
+        }
+
         public List<Project> GetProjects()
         {
             return context.Projects.ToList();

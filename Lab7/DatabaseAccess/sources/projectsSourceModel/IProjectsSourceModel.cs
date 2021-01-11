@@ -13,5 +13,6 @@ namespace Lab7.DatabaseAccess.sources.projectsSourceModel
         void DeleteProject(int id);
         void InsertProject(Project project);
 
+        Project FindById(int Id);
     }
 }

@@ -53,5 +53,10 @@ namespace Lab7.repositories
                 CustId = 2
             };
         }
+
+        public ProjectViewModel GetById(int Id)
+        {
+            return toViewModel(sourceModel.FindById(Id));
+        }
     }
 }

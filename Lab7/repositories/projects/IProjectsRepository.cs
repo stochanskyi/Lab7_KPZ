@@ -13,5 +13,7 @@ namespace Lab7.repositories
         void CreateProject(ProjectViewModel model);
         void UpdateProject(ProjectViewModel model);
         void DeleteProject(int id);
+
+        ProjectViewModel GetById(int Id);
     }
 }
